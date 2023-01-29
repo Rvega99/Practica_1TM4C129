@@ -46,7 +46,12 @@ IPATH=../../..
 # The default rule, which causes the blinky example to be built.
 #
 all: ${COMPILER}
-all: ${COMPILER}/blinky.axf
+all: ${COMPILER}/main.axf
+
+
+debug: CFLAGS+=-g -D DEBUG
+debug: ${COMPILER}
+debug: ${COMPILER}/main.axf
 
 #
 # The rule to clean out all the build products.
@@ -63,11 +68,11 @@ ${COMPILER}:
 #
 # Rules for building the blinky example.
 #
-${COMPILER}/blinky.axf: ${COMPILER}/blinky.o
-${COMPILER}/blinky.axf: ${COMPILER}/startup_${COMPILER}.o
-${COMPILER}/blinky.axf: blinky.ld
-SCATTERgcc_blinky=blinky.ld
-ENTRY_blinky=ResetISR
+${COMPILER}/main.axf: ${COMPILER}/main.o
+${COMPILER}/main.axf: ${COMPILER}/startup_${COMPILER}.o
+${COMPILER}/main.axf: main.ld
+SCATTERgcc_main=main.ld
+ENTRY_main=ResetISR
 
 #
 # Include the automatically generated dependency files.
